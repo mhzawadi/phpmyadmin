@@ -1,6 +1,6 @@
 ARG MH_ARCH
 ARG MH_TAG
-FROM ${MH_ARCH}:${MH_TAG}
+FROM ${MH_ARCH}:7.2-fpm-alpine
 MAINTAINER Matthew Horwood <matt@horwood.biz>
 
 # docker-entrypoint.sh dependencies
