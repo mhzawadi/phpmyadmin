@@ -1,13 +1,10 @@
-# Official phpMyAdmin Docker image
+# phpMyAdmin Docker image
 
 Run phpMyAdmin with Alpine, supervisor, nginx and PHP FPM.
 
-[![Build Status](https://travis-ci.org/phpmyadmin/docker.svg?branch=master)](https://travis-ci.org/phpmyadmin/docker)
-[![Docker Pulls](https://img.shields.io/docker/pulls/phpmyadmin/phpmyadmin.svg)][hub]
-[![Docker Stars](https://img.shields.io/docker/stars/phpmyadmin/phpmyadmin.svg)][hub]
-[![Docker Layers](https://images.microbadger.com/badges/image/phpmyadmin/phpmyadmin.svg)](https://microbadger.com/images/phpmyadmin/phpmyadmin "Get your own image badge on microbadger.com")
-[![Docker Version](https://images.microbadger.com/badges/version/phpmyadmin/phpmyadmin.svg)](https://microbadger.com/images/phpmyadmin/phpmyadmin "Get your own version badge on microbadger.com")
-
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/mhzawadi/phpmyadmin.svg?label=amd64)
+![Docker Pulls](https://img.shields.io/docker/pulls/mhzawadi/phpmyadmin.svg)
+![Docker Stars](https://img.shields.io/docker/stars/mhzawadi/phpmyadmin.svg)
 
 All following examples will bring you phpMyAdmin on `http://localhost:8080`
 where you can enjoy your happy MySQL administration.
@@ -37,7 +34,7 @@ First you need to run MySQL or MariaDB server in Docker, and this image need
 link a running mysql instance container:
 
 ```
-docker run --name myadmin -d --link mysql_db_server:db -p 8080:80 phpmyadmin/phpmyadmin
+docker run --name myadmin -d --link mysql_db_server:db -p 8080:80 mhzawadi/phpmyadmin
 ```
 
 ## Usage with external server
@@ -46,7 +43,7 @@ You can specify MySQL host in the `PMA_HOST` environment variable. You can also
 use `PMA_PORT` to specify port of the server in case it's not the default one:
 
 ```
-docker run --name myadmin -d -e PMA_HOST=dbhost -p 8080:80 phpmyadmin/phpmyadmin
+docker run --name myadmin -d -e PMA_HOST=dbhost -p 8080:80 mhzawadi/phpmyadmin
 ```
 
 ## Usage with arbitrary server
@@ -54,7 +51,7 @@ docker run --name myadmin -d -e PMA_HOST=dbhost -p 8080:80 phpmyadmin/phpmyadmin
 You can use arbitrary servers by adding ENV variable `PMA_ARBITRARY=1` to the startup command:
 
 ```
-docker run --name myadmin -d -e PMA_ARBITRARY=1 -p 8080:80 phpmyadmin/phpmyadmin
+docker run --name myadmin -d -e PMA_ARBITRARY=1 -p 8080:80 mhzawadi/phpmyadmin
 ```
 
 ## Usage with docker-compose and arbitrary server
@@ -80,7 +77,7 @@ docker-compose -f docker-compose.testing.yml up phpmyadmin
 
 ## Adding Custom Configuration
 
-You can add your own custom config.inc.php settings (such as Configuration Storage setup) 
+You can add your own custom config.inc.php settings (such as Configuration Storage setup)
 by creating a file named "config.user.inc.php" with the various user defined settings
 in it, and then linking it into the container using:
 
@@ -88,8 +85,8 @@ in it, and then linking it into the container using:
 -v /some/local/directory/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
 ```
 On the "docker run" line like this:
-``` 
-docker run --name myadmin -d --link mysql_db_server:db -p 8080:80 -v /some/local/directory/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php phpmyadmin/phpmyadmin
+```
+docker run --name myadmin -d --link mysql_db_server:db -p 8080:80 -v /some/local/directory/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php mhzawadi/phpmyadmin
 ```
 
 See the following links for config file information.
@@ -114,6 +111,6 @@ Set the variable ``PMA_ABSOLUTE_URI`` to the fully-qualified path (``https://pma
 
 For more detailed documentation see https://docs.phpmyadmin.net/en/latest/setup.html#installing-using-docker
 
-[hub]: https://hub.docker.com/r/phpmyadmin/phpmyadmin/
+[hub]: https://hub.docker.com/r/mhzawadi/phpmyadmin/
 
 Please report any issues with the Docker container to https://github.com/phpmyadmin/docker/issues
