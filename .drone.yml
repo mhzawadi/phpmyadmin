@@ -1,38 +1,17 @@
+---
 kind: pipeline
-type: docker
 name: default
 
 steps:
-  - name: test-01
-    image: alpine
-    environment:
-      MYUSERNAME:
-        from_secret: myusername
-    commands:
-      - echo "echo secret"
-      - echo $${MYUSERNAME}
-      - echo "run env command"
-      - env
-      - echo $${MYUSERNAME} > /tmp/file
-      - mkdir -p /tmp/foo/dir
-      - touch /tmp/foo/dir/test.txt
+- name: test
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+  - docker ps -a
 
-  - name: publish
-    image: plugins/docker
-    settings:
-      repo: mhzawadi/dronetest
-      auto_tag: false
-      auto_tag_suffix: alpine
-      tags:
-        - ${DRONE_COMMIT}
-        - latest
-      username:
-        from_secret: dockerhub_username
-      password:
-        from_secret: dockerhub_password
-
-trigger:
-  branch:
-  - master
-  - 4.9.1
-  
+volumes:
+- name: dockersock
+  host:
+    path: /var/run/docker.sock
