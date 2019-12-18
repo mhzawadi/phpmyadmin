@@ -35,7 +35,7 @@ RUN set -ex; \
 	rm -rf /var/lib/apt/lists/*
 
 # Calculate download URL
-ENV VERSION 4.9.0.1
+ENV VERSION 4.9.2
 ENV URL https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz
 LABEL version=$VERSION
 
