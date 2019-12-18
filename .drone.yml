@@ -34,3 +34,4 @@ steps:
 trigger:
   branch:
   - master
+  - 4.9.1
