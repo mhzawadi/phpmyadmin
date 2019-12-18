@@ -3,7 +3,7 @@ type: docker
 name: default
 
 steps:
-  - name: test
+  - name: test-01
     image: alpine
     environment:
       MYUSERNAME:
