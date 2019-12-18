@@ -1,0 +1,31 @@
+kind: pipeline
+name: default
+
+steps:
+  - name: test
+    image: alpine
+    environment:
+      MYUSERNAME:
+        from_secret: myusername
+    commands:
+      - echo "echo secret"
+      - echo $${MYUSERNAME}
+      - echo "run env command"
+      - env
+      - echo $${MYUSERNAME} > /tmp/file
+      - mkdir -p /tmp/foo/dir
+      - touch /tmp/foo/dir/test.txt
+
+  - name: publish
+    image: plugins/docker
+    settings:
+      repo: mhzawadi/dronetest
+      auto_tag: false
+      auto_tag_suffix: alpine
+      tags:
+        - ${DRONE_COMMIT}
+        - latest
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
