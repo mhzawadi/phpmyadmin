@@ -1,4 +1,4 @@
-
+ARG MH_ARCH
 ARG MH_TAG
 FROM ${MH_ARCH}:7.2-apache
 MAINTAINER Matthew Horwood <matt@horwood.biz>
