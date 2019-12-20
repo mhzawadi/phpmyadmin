@@ -37,7 +37,7 @@ steps:
   - name: publish
     image: plugins/docker
     settings:
-      repo: mhzawadi/dronetest
+      repo: ${DRONE_REPO}
       auto_tag: false
       auto_tag_suffix: alpine
       tags:

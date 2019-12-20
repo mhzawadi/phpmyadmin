@@ -2,7 +2,7 @@
 
 Run phpMyAdmin with Alpine, supervisor, nginx and PHP FPM.
 
-![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/mhzawadi/phpmyadmin.svg?label=amd64)
+![Build Status](https://drone.horwood.biz/api/badges/matt/phpmyadmin/status.svg)](https://drone.horwood.biz/matt/phpmyadmin)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mhzawadi/phpmyadmin.svg)
 ![Docker Stars](https://img.shields.io/docker/stars/mhzawadi/phpmyadmin.svg)
 
