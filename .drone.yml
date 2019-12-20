@@ -1,0 +1,52 @@
+---
+kind: pipeline
+name: arm32
+
+platform:
+  os: linux
+  arch: arm
+
+steps:
+  - name: publish
+    image: plugins/docker
+    settings:
+      repo: ${DRONE_REPO}
+      auto_tag: false
+      auto_tag_suffix: alpine
+      tags:
+        - ${DRONE_TAG}
+        - latest
+      build_args:
+        - MH_ARCH=arm32v7/php
+        - MH_TAG=test
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
+
+---
+kind: pipeline
+type: docker
+name: arm64
+
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+  - name: publish
+    image: plugins/docker
+    settings:
+      repo: mhzawadi/dronetest
+      auto_tag: false
+      auto_tag_suffix: alpine
+      tags:
+        - ${DRONE_TAG}
+        - latest
+      build_args:
+        - MH_ARCH=arm64v8/php
+        - MH_TAG=test
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
