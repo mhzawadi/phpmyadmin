@@ -23,7 +23,11 @@ steps:
         from_secret: dockerhub_username
       password:
         from_secret: dockerhub_password
-
+  - name: send telegram notification
+    image: appleboy/drone-telegram
+    settings:
+      token: 635081347:AAEA56jjuoG3QokgTPb7URrDDJBbBDl1VVc
+      to: mhzawadi
 ---
 kind: pipeline
 type: docker
@@ -50,3 +54,8 @@ steps:
         from_secret: dockerhub_username
       password:
         from_secret: dockerhub_password
+  - name: send telegram notification
+    image: appleboy/drone-telegram
+    settings:
+      token: 635081347:AAEA56jjuoG3QokgTPb7URrDDJBbBDl1VVc
+      to: mhzawadi
