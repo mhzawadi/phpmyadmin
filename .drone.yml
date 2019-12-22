@@ -10,13 +10,13 @@ steps:
   - name: publish
     image: plugins/docker
     settings:
-      repo: ${DRONE_REPO}
+      repo: mhzawadi/${DRONE_REPO_NAME}
       auto_tag: false
-      auto_tag_suffix: alpine
       tags:
-        - ${DRONE_TAG}
+        - v4.9.2
         - latest
       build_args:
+        - version=4.9.2
         - MH_ARCH=arm32v7/php
         - MH_TAG=test
       username:
@@ -41,13 +41,13 @@ steps:
   - name: publish
     image: plugins/docker
     settings:
-      repo: mhzawadi/dronetest
+      repo: mhzawadi/${DRONE_REPO_NAME}
       auto_tag: false
-      auto_tag_suffix: alpine
       tags:
-        - ${DRONE_TAG}
+        - v4.9.2
         - latest
       build_args:
+        - version=4.9.2
         - MH_ARCH=arm64v8/php
         - MH_TAG=test
       username:

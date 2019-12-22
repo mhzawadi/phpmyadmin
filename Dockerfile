@@ -1,5 +1,6 @@
 ARG MH_ARCH
 ARG MH_TAG
+ARG VERSION
 FROM ${MH_ARCH}:7.2-apache
 MAINTAINER Matthew Horwood <matt@horwood.biz>
 
@@ -35,7 +36,6 @@ RUN set -ex; \
 	rm -rf /var/lib/apt/lists/*
 
 # Calculate download URL
-ENV VERSION 4.9.2
 ENV URL https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz
 LABEL version=$VERSION
 
