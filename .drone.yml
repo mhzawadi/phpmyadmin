@@ -55,6 +55,10 @@ kind: pipeline
 type: docker
 name: manifest
 
+platform:
+  os: linux
+  arch: arm
+
 steps:
 - name: manifest
   image: plugins/manifest
@@ -76,6 +80,10 @@ depends_on:
 kind: pipeline
 type: docker
 name: notification
+
+platform:
+  os: linux
+  arch: arm
 
 steps:
   - name: send telegram notification
