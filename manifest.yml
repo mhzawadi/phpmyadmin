@@ -1,0 +1,27 @@
+---
+image: mhzawadi/phpmyadmin:latest
+manifests:
+  -
+    image: mhzawadi/phpmyadmin:latest-arm
+    platform:
+      architecture: arm
+      os: linux
+  -
+    image: mhzawadi/phpmyadmin:latest-amd64
+    platform:
+      architecture: amd64
+      os: linux
+
+---
+image: mhzawadi/phpmyadmin:v4.9.2
+manifests:
+  -
+    image: mhzawadi/phpmyadmin:v4.9.2-arm
+    platform:
+      architecture: arm
+      os: linux
+  -
+    image: mhzawadi/phpmyadmin:v4.9.2-amd64
+    platform:
+      architecture: amd64
+      os: linux
