@@ -17,7 +17,7 @@ steps:
         - latest
       build_args:
         - MH_ARCH=arm32v7/php
-        - MH_TAG=test
+        - MH_TAG=7.2-apache-stretch
       username:
         from_secret: dockerhub_username
       password:
@@ -47,7 +47,7 @@ steps:
         - latest
       build_args:
         - MH_ARCH=arm64v8/php
-        - MH_TAG=test
+        - MH_TAG=7.2-apache-stretch
       username:
         from_secret: dockerhub_username
       password:
