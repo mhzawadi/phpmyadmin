@@ -1,6 +1,32 @@
 ---
 kind: pipeline
 type: docker
+name: amd64
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+  - name: publish
+    image: plugins/docker
+    settings:
+      repo: mhzawadi/${DRONE_REPO_NAME}
+      auto_tag: false
+      tags:
+        - v4.9.2-amd64
+        - latest-amd64
+      build_args:
+        - MH_ARCH=php
+        - MH_TAG=7.2-apache-stretch
+      username:
+        from_secret: dockerhub_username
+      password:
+        from_secret: dockerhub_password
+
+---
+kind: pipeline
+type: docker
 name: arm32
 
 platform:
@@ -73,13 +99,14 @@ steps:
       - linux/arm
       - linux/arm64
 depends_on:
+  - amd64
   - arm64
   - arm32
 
 ---
 kind: pipeline
 type: docker
-name: manifest-latest
+name: manifest_latest
 
 platform:
   os: linux
@@ -120,4 +147,4 @@ steps:
 
 depends_on:
   - manifest
-  - manifest-latest
+  - manifest_latest
