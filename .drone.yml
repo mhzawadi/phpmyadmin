@@ -144,8 +144,10 @@ steps:
   - name: send telegram notification
     image: appleboy/drone-telegram
     settings:
-      token: 635081347:AAEA56jjuoG3QokgTPb7URrDDJBbBDl1VVc
-      to: 595059757
+      token: 
+        from_secret: telegram_token
+      to:
+        from_secret: telegram_user
 
 depends_on:
   - manifest
