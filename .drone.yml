@@ -14,7 +14,7 @@ steps:
       repo: mhzawadi/${DRONE_REPO_NAME}
       auto_tag: false
       tags:
-        - v4.9.2-amd64
+        - v4.9.4-amd64
         - latest-amd64
       build_args:
         - MH_ARCH=php
@@ -40,7 +40,7 @@ steps:
       repo: mhzawadi/${DRONE_REPO_NAME}
       auto_tag: false
       tags:
-        - v4.9.2-arm
+        - v4.9.4-arm
         - latest-arm
       build_args:
         - MH_ARCH=arm32v7/php
@@ -66,7 +66,7 @@ steps:
       repo: mhzawadi/${DRONE_REPO_NAME}
       auto_tag: false
       tags:
-        - v4.9.2-arm64
+        - v4.9.4-arm64
         - latest-arm64
       build_args:
         - MH_ARCH=arm64v8/php
@@ -93,8 +93,8 @@ steps:
       from_secret: dockerhub_username
     password:
       from_secret: dockerhub_password
-    target: mhzawadi/${DRONE_REPO_NAME}:v4.9.2
-    template: mhzawadi/${DRONE_REPO_NAME}:v4.9.2-ARCH
+    target: mhzawadi/${DRONE_REPO_NAME}:v4.9.4
+    template: mhzawadi/${DRONE_REPO_NAME}:v4.9.4-ARCH
     platforms:
       - linux/arm
       - linux/arm64
@@ -144,7 +144,7 @@ steps:
   - name: send telegram notification
     image: appleboy/drone-telegram
     settings:
-      token: 
+      token:
         from_secret: telegram_token
       to:
         from_secret: telegram_user
