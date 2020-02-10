@@ -78,7 +78,7 @@ for ($i = 1; isset($hosts[$i - 1]); $i++) {
         $cfg['Servers'][$i]['user'] = $_ENV['PMA_USER'];
         $cfg['Servers'][$i]['password'] = isset($_ENV['PMA_PASSWORD']) ? $_ENV['PMA_PASSWORD'] : '';
     } else {
-        $cfg['Servers'][$i]['auth_type'] = 'cookie';
+        $cfg['Servers'][$i]['auth_type'] = 'http';
     }
     if (isset($_ENV['PMA_PMADB'])) {
       $cfg['Servers'][$i]['pmadb'] = $_ENV['PMA_PMADB'];
