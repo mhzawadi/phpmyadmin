@@ -1,6 +1,6 @@
 # phpMyAdmin Docker image
 
-Run phpMyAdmin with Alpine, supervisor, nginx and PHP FPM.
+Run phpMyAdmin with Alpine, nginx and PHP FPM.
 
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/mhzawadi/phpmyadmin.svg?label=amd64)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mhzawadi/phpmyadmin.svg)
