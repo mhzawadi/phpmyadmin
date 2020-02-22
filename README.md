@@ -114,3 +114,8 @@ For more detailed documentation see https://docs.phpmyadmin.net/en/latest/setup.
 [hub]: https://hub.docker.com/r/mhzawadi/phpmyadmin/
 
 Please report any issues with the Docker container to https://github.com/phpmyadmin/docker/issues
+
+### how to build
+Latest is build from the docker hub once I push to the github repo, the arm versions are built from my mac with the below buildx tool
+
+`docker buildx build --platform linux/amd64,linux/arm64 -t mhzawadi/phpmyadmin:v5.0.1.3 --push .`
