@@ -118,4 +118,4 @@ Please report any issues with the Docker container to https://github.com/phpmyad
 ### how to build
 Latest is build from the docker hub once I push to the github repo, the arm versions are built from my mac with the below buildx tool
 
-`docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t mhzawadi/phpmyadmin:v5.0.1.3 --push .`
+`docker buildx build --platform linux/amd64,linux/arm64,linux/arm/v7 -t mhzawadi/phpmyadmin:v5.0.2.1 --push .`
