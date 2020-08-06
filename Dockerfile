@@ -47,7 +47,7 @@ RUN set -ex; \
 		cp /config/php.ini /etc/php7/php.ini && \
 		cp /config/php_fpm_site.conf /etc/php7/php-fpm.d/www.conf; \
 		chown -R nobody:nginx /var/www/html /sessions; \
-    cp /config/nginx_site.conf > /etc/nginx/conf.d/site.conf
+    cp /config/nginx_site.conf /etc/nginx/conf.d/site.conf
 
 EXPOSE 80
 ENTRYPOINT ["/config/start.sh"]
