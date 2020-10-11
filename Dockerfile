@@ -47,7 +47,8 @@ RUN set -ex; \
 		cp /config/php.ini /etc/php7/php.ini && \
 		cp /config/php_fpm_site.conf /etc/php7/php-fpm.d/www.conf; \
 		chown -R nobody:nginx /var/www/html /sessions; \
-    cp /config/nginx_site.conf /etc/nginx/conf.d/default.conf;
+    cp /config/nginx_site.conf /etc/nginx/conf.d/default.conf; \
+    cp /config/healthcheck.php /var/www/html/;
 
 EXPOSE 80
 ENTRYPOINT ["/config/start.sh"]
@@ -55,4 +56,4 @@ CMD ["nginx", "-g", "daemon off;"]
 
 ## Health Check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
-  CMD curl -f http://127.0.0.1/version_check.php || exit 1
+  CMD curl -f http://127.0.0.1/healthcheck.php || exit 1
