@@ -3,7 +3,6 @@ name: build our image for latest
 on:
   push:
     branches-ignore: master
-    branches: *
 
 jobs:
   build:
