@@ -2,6 +2,8 @@
 
 Run phpMyAdmin with Alpine, nginx and PHP FPM.
 
+![GitHub Repo stars](https://img.shields.io/github/stars/mhzawadi/phpmyadmin?style=social)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/mhzawadi/phpmyadmin/build%20our%20image%20for%20latest?label=Docker%20Latest)
 ![Docker Pulls](https://img.shields.io/docker/pulls/mhzawadi/phpmyadmin.svg)
 ![Docker Stars](https://img.shields.io/docker/stars/mhzawadi/phpmyadmin.svg)
 
