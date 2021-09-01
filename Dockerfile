@@ -1,15 +1,15 @@
-FROM alpine:3.9.4
+FROM alpine:3.14
 MAINTAINER Matthew Horwood <matt@horwood.biz>
 
 # Install required deb packages
 RUN apk update && \
-	apk add gnupg nginx php7-fpm php7-common php7-iconv php7-json php7-gd \
-	php7-curl php7-xml php7-mysqli php7-imap php7-pdo php7-pdo_mysql \
-	php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap \
-	php7-ctype php7-dom php7-session php7-mbstring curl \
-	&& mkdir -p /var/www/html/ \
-	&& mkdir -p /run/nginx \
-	&& rm -f /var/cache/apk/*;
+    apk add gnupg nginx php7-fpm php7-common php7-iconv php7-json php7-gd \
+    php7-curl php7-xml php7-mysqli php7-imap php7-pdo php7-pdo_mysql \
+    php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap \
+    php7-ctype php7-dom php7-session php7-mbstring curl \
+    && mkdir -p /var/www/html/ \
+    && mkdir -p /run/nginx \
+    && rm -f /var/cache/apk/*;
 
 # Calculate download URL
 ENV VERSION 5.1.1
@@ -24,10 +24,10 @@ ADD $URL.asc /tmp/
 COPY setup /config
 
 RUN set -ex; \
-		mkdir /usr/src; \
-		mkdir /etc/phpmyadmin/; \
-		mkdir /sessions; \
-		ls -l /config; \
+    mkdir /usr/src; \
+    mkdir /etc/phpmyadmin/; \
+    mkdir /sessions; \
+    ls -l /config; \
     export GNUPGHOME="$(mktemp -d)"; \
     export GPGKEY="3D06A59ECE730EB71B511C17CE752F178259BD92"; \
     gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPGKEY" \
@@ -42,12 +42,12 @@ RUN set -ex; \
     mv /usr/src/phpMyAdmin-$VERSION-all-languages /usr/src/phpmyadmin; \
     rm -rf /usr/src/phpmyadmin/setup/ /usr/src/phpmyadmin/examples/ /usr/src/phpmyadmin/test/ /usr/src/phpmyadmin/po/ /usr/src/phpmyadmin/composer.json /usr/src/phpmyadmin/RELEASE-DATE-$VERSION; \
     sed -i "s@define('CONFIG_DIR'.*@define('CONFIG_DIR', '/etc/phpmyadmin/');@" /usr/src/phpmyadmin/libraries/vendor_config.php; \
-		cp -R /usr/src/phpmyadmin/* /var/www/html/; \
-		cp /config/config.inc.php /etc/phpmyadmin/config.inc.php && \
-		cp /config/php.ini /etc/php7/php.ini && \
-		cp /config/php_fpm_site.conf /etc/php7/php-fpm.d/www.conf; \
-		chown -R nobody:nginx /var/www/html /sessions; \
-    cp /config/nginx_site.conf /etc/nginx/conf.d/default.conf; \
+    cp -R /usr/src/phpmyadmin/* /var/www/html/; \
+    cp /config/config.inc.php /etc/phpmyadmin/config.inc.php && \
+    cp /config/php.ini /etc/php7/php.ini && \
+    cp /config/php_fpm_site.conf /etc/php7/php-fpm.d/www.conf; \
+    chown -R nobody:nginx /var/www/html /sessions; \
+    cp /config/nginx_site.conf /etc/nginx/http.d/default.conf; \
     cp /config/healthcheck.php /var/www/html/;
 
 EXPOSE 80
