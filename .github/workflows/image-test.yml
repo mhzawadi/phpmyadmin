@@ -1,6 +1,7 @@
 name: build dev image
 
 on:
+  workflow_dispatch:
   push:
     branches-ignore: master
 
