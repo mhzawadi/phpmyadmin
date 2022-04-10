@@ -4,7 +4,9 @@ on:
   workflow_dispatch:
   push:
     branches-ignore: master
-
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron:  '5 3 * * 1'
 jobs:
   build:
     runs-on: ubuntu-latest
