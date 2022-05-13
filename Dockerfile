@@ -12,7 +12,7 @@ RUN apk update && \
     && rm -f /var/cache/apk/*;
 
 # Calculate download URL
-ENV VERSION 5.2.0
+ENV VERSION 5.1.4
 ENV URL https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz
 LABEL version=$VERSION
 
