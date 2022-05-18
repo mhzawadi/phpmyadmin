@@ -31,11 +31,21 @@ You can use following tags on Docker hub:
 
 ## Usage with linked server
 
-First you need to run MySQL or MariaDB server in Docker, and this image need
-link a running mysql instance container:
+### Mysql
+
+Run a MySQL database, dedicated to phpmyadmin
+
+```bash
+$ docker run --name phpmyadmin-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -v /my_dir/phpmyadmin:/var/lib/mysql -d mysql:5.7
+```
+
+Here, we store data on the host system under `/my_dir/phpmyadmin` and use a specific root password.
+
+### phpMyAdmin
+The below command will start phpmyadmin on port 8080:
 
 ```
-docker run --name myadmin -d --link mysql_db_server:db -p 8080:80 mhzawadi/phpmyadmin
+docker run --name myadmin -d --link phpmyadmin-mysql:db -p 8080:80 mhzawadi/phpmyadmin
 ```
 
 ## Usage with external server
