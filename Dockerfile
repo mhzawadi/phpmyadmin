@@ -1,12 +1,12 @@
-FROM alpine:3.15
+FROM alpine:3.16
 MAINTAINER Matthew Horwood <matt@horwood.biz>
 
 # Install required deb packages
 RUN apk update && \
-    apk add gnupg nginx php7-fpm php7-common php7-iconv php7-json php7-gd \
-    php7-curl php7-xml php7-mysqli php7-imap php7-pdo php7-pdo_mysql \
-    php7-soap php7-xmlrpc php7-posix php7-mcrypt php7-gettext php7-ldap \
-    php7-ctype php7-dom php7-session php7-mbstring curl \
+    apk add gnupg nginx php81-fpm php81-common php81-iconv php81-json php81-gd \
+    php81-curl php81-xml php81-mysqli php81-imap php81-pdo php81-pdo_mysql \
+    php81-soap php81-posix php81-gettext php81-ldap \
+    php81-ctype php81-dom php81-session php81-mbstring curl \
     && mkdir -p /var/www/html/ \
     && mkdir -p /run/nginx \
     && rm -f /var/cache/apk/*;
@@ -44,8 +44,8 @@ RUN set -ex; \
     sed -i "s@'configFile' => ROOT_PATH . 'config.inc.php',@'configFile' => '/etc/phpmyadmin/config.inc.php',@" /usr/src/phpmyadmin/libraries/vendor_config.php; \
     cp -R /usr/src/phpmyadmin/* /var/www/html/; \
     cp /config/config.inc.php /etc/phpmyadmin/config.inc.php && \
-    cp /config/php.ini /etc/php7/php.ini && \
-    cp /config/php_fpm_site.conf /etc/php7/php-fpm.d/www.conf; \
+    cp /config/php.ini /etc/php81/php.ini && \
+    cp /config/php_fpm_site.conf /etc/php81/php-fpm.d/www.conf; \
     chown -R nobody:nginx /var/www/html /sessions; \
     cp /config/nginx_site.conf /etc/nginx/http.d/default.conf; \
     cp /config/healthcheck.php /var/www/html/;

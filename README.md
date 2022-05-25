@@ -36,7 +36,7 @@ You can use following tags on Docker hub:
 Run a MySQL database, dedicated to phpmyadmin
 
 ```bash
-$ docker run --name phpmyadmin-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -v /my_dir/phpmyadmin:/var/lib/mysql -d mysql:5.7
+docker run --name phpmyadmin-mysql -e MYSQL_ROOT_PASSWORD=my-secret-pw -v /my_dir/phpmyadmin:/var/lib/mysql -d mysql:5.7
 ```
 
 Here, we store data on the host system under `/my_dir/phpmyadmin` and use a specific root password.
