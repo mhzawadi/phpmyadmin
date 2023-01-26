@@ -1,9 +1,9 @@
-name: build dev image
+name: build our image for dev
 
 on:
   workflow_dispatch:
   push:
-    branches-ignore: master
+    branches: dev
 
 jobs:
   build:
