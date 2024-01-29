@@ -3,10 +3,10 @@ MAINTAINER Matthew Horwood <matt@horwood.biz>
 
 # Install required deb packages
 RUN apk update && \
-    apk add gnupg nginx php81-fpm php81-common php81-iconv php81-json php81-gd \
-    php81-curl php81-xml php81-mysqli php81-imap php81-pdo php81-pdo_mysql \
-    php81-soap php81-posix php81-gettext php81-ldap \
-    php81-ctype php81-dom php81-session php81-mbstring curl \
+    apk add gnupg nginx php82-fpm php82-common php82-iconv php82-json php82-gd \
+    php82-curl php82-xml php82-mysqli php82-imap php82-pdo php82-pdo_mysql \
+    php82-soap php82-posix php82-gettext php82-ldap \
+    php82-ctype php82-dom php82-session php82-mbstring curl \
     && mkdir -p /var/www/html/ \
     && mkdir -p /run/nginx \
     && rm -f /var/cache/apk/*;
@@ -44,8 +44,8 @@ RUN set -ex; \
     sed -i "s@'configFile' => ROOT_PATH . 'config.inc.php',@'configFile' => '/etc/phpmyadmin/config.inc.php',@" /usr/src/phpmyadmin/libraries/vendor_config.php; \
     cp -R /usr/src/phpmyadmin/* /var/www/html/; \
     cp /config/config.inc.php /etc/phpmyadmin/config.inc.php && \
-    cp /config/php.ini /etc/php81/php.ini && \
-    cp /config/php_fpm_site.conf /etc/php81/php-fpm.d/www.conf; \
+    cp /config/php.ini /etc/php82/php.ini && \
+    cp /config/php_fpm_site.conf /etc/php82/php-fpm.d/www.conf; \
     chown -R nobody:nginx /var/www/html /sessions; \
     cp /config/nginx_site.conf /etc/nginx/http.d/default.conf; \
     cp /config/healthcheck.php /var/www/html/;
