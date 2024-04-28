@@ -1,0 +1,53 @@
+version: '3.5'
+
+# docker stack deploy --compose-file stack-phpmyadmin.yml phpmyadmin
+
+volumes:
+  phpmyadmin_data:
+  mariadb_10_4:
+
+services:
+  proxyv2:
+    image: traefik:v2 # The official Traefik docker image
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker"
+      - "--providers.docker.swarmMode=true"
+    ports:
+      - "80:80"     # The HTTP port
+      - "443:443"   # The HTTP port
+      - "8181:8080" # The Web UI (enabled by --api)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - "traefik.enable=false"
+  phpmyadmin:
+    image: mhzawadi/phpmyadmin
+    volumes:
+      - phpmyadmin_data:/mysql
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        - "traefik.http.routers.phpmyadmin.rule=Host(`phpmyadmin.docker.local`)"
+        - "traefik.http.routers.phpmyadmin.service=phpmyadmin"
+        - "traefik.http.services.phpmyadmin.loadbalancer.server.port=80"
+  mariadb_10_4:
+    # MySQL 5.7
+    image: mariadb:10.4.10
+    volumes:
+      - mariadb_10_4:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql_password
+      - MYSQL_DATABASE=phpmyadmin
+      - MYSQL_USER=phpmyadmin
+      - MYSQL_PASSWORD=phpmyadmin
+    deploy:
+      mode: replicated
+      replicas: 1
+      labels:
+        - "traefik.enable=false"
