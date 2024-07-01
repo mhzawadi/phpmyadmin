@@ -11,7 +11,7 @@ RUN apk update && \
     && mkdir -p /run/nginx \
     && rm -f /var/cache/apk/*; \
     [ -f /usr/bin/php ] && rm -f /usr/bin/php; \
-    ln -s /usr/bin/php82 /usr/bin/php; \
+    ln -s /usr/bin/php82 /usr/bin/php;
 
 # Calculate download URL
 ENV VERSION 5.2.1
