@@ -1,4 +1,4 @@
-version: '3.5'
+---
 
 # docker stack deploy --compose-file stack-phpmyadmin.yml phpmyadmin
 
