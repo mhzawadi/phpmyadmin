@@ -1,9 +1,9 @@
 FROM alpine:3.20
-MAINTAINER Matthew Horwood <matt@horwood.biz>
+LABEL org.opencontainers.image.authors="matt@horwood.biz"
 
 # Install required deb packages
 RUN apk update && \
-    apk add gnupg nginx php82-fpm php82-common php82-iconv php82-json php82-gd \
+    apk add gnupg unit-php82 php82-common php82-iconv php82-json php82-gd \
     php82-curl php82-xml php82-mysqli php82-imap php82-pdo php82-pdo_mysql \
     php82-soap php82-posix php82-gettext php82-ldap \
     php82-ctype php82-dom php82-session php82-mbstring curl \
@@ -14,8 +14,8 @@ RUN apk update && \
     ln -s /usr/bin/php82 /usr/bin/php;
 
 # Calculate download URL
-ENV VERSION 5.2.1
-ENV URL https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz
+ENV VERSION=5.2.1
+ENV URL=https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz
 LABEL version=$VERSION
 
 # Download tarball, verify it using gpg and extract
@@ -47,14 +47,12 @@ RUN set -ex; \
     cp -R /usr/src/phpmyadmin/* /var/www/html/; \
     cp /config/config.inc.php /etc/phpmyadmin/config.inc.php && \
     cp /config/php.ini /etc/php82/php.ini && \
-    cp /config/php_fpm_site.conf /etc/php82/php-fpm.d/www.conf; \
-    chown -R nobody:nginx /var/www/html /sessions; \
-    cp /config/nginx_site.conf /etc/nginx/http.d/default.conf; \
+    chown -R unit:unit /var/www/html /sessions; \
     cp /config/healthcheck.php /var/www/html/;
 
 EXPOSE 80
 ENTRYPOINT ["/config/start.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+CMD ["unitd", "--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
 
 ## Health Check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \

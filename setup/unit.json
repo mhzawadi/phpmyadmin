@@ -1,0 +1,34 @@
+{
+  "listeners": {
+    "*:80": {
+      "pass": "routes"
+    }
+  },
+
+  "routes": [
+    {
+      "match": {
+        "uri": "~\\.(css|gif|html?|ico|jpg|js(on)?|png|svg|ttf|woff2?)$"
+      },
+
+      "action": {
+        "share": "/var/www/html$uri"
+      }
+    },
+    {
+      "action": {
+        "pass": "applications/phpmyadmin"
+      }
+    }
+  ],
+
+  "applications": {
+    "phpmyadmin": {
+      "type": "php",
+      "root": "/var/www/html/"
+    }
+  },
+  "access_log": {
+    "path": "/var/log/unit/access.log"
+  }
+}
