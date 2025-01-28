@@ -1,4 +1,4 @@
-FROM alpine:3.20
+FROM alpine:3.21
 LABEL org.opencontainers.image.authors="matt@horwood.biz"
 
 # Install required deb packages
@@ -14,7 +14,7 @@ RUN apk update && \
     ln -s /usr/bin/php82 /usr/bin/php;
 
 # Calculate download URL
-ENV VERSION=5.2.1
+ENV VERSION=5.2.2
 ENV URL=https://files.phpmyadmin.net/phpMyAdmin/${VERSION}/phpMyAdmin-${VERSION}-all-languages.tar.xz
 LABEL version=$VERSION
 
