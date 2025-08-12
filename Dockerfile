@@ -1,4 +1,4 @@
-FROM alpine:3.21
+FROM alpine:3.22
 LABEL org.opencontainers.image.authors="matt@horwood.biz"
 
 # Install required deb packages
