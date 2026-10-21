@@ -31,7 +31,7 @@ RUN set -ex; \
     mkdir /sessions; \
     ls -l /config; \
     export GNUPGHOME="$(mktemp -d)"; \
-    export GPGKEY="3D06A59ECE730EB71B511C17CE752F178459BD92"; \
+    export GPGKEY="2d2e13c735366d318425c78e4ee2cc8fc648d77faba3ddea2cd516e43885733f"; \
     gpg --keyserver hkp://pgp.mit.edu --recv-keys "$GPGKEY" \
         || gpg --batch --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$GPGKEY" \
         || gpg --batch --keyserver keys.gnupg.net --recv-keys "$GPGKEY" \
