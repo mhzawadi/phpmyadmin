@@ -9,9 +9,7 @@ RUN apk update && \
     php84-ctype php84-dom php84-session php84-mbstring curl \
     && mkdir -p /var/www/html/ \
     && mkdir -p /run/nginx \
-    && rm -f /var/cache/apk/*; \
-    [ -f /usr/bin/php ] && rm -f /usr/bin/php; \
-    ln -s /usr/bin/php84 /usr/bin/php;
+    && rm -f /var/cache/apk/*;
 
 # Calculate download URL
 ENV VERSION=5.2.3
