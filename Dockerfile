@@ -32,7 +32,7 @@ RUN set -ex; \
     ls -l /config; \
     export GNUPGHOME="$(mktemp -d)"; \
     export GPGKEY="3D06A59ECE730EB71B511C17CE752F178459BD92"; \
-    gpg --batch --keyserver ha.pool.sks-keyservers.net --recv-keys "$GPGKEY" \
+    gpg --keyserver hkp://pgp.mit.edu --recv-keys "$GPGKEY" \
         || gpg --batch --keyserver ipv4.pool.sks-keyservers.net --recv-keys "$GPGKEY" \
         || gpg --batch --keyserver keys.gnupg.net --recv-keys "$GPGKEY" \
         || gpg --batch --keyserver pgp.mit.edu --recv-keys "$GPGKEY" \
