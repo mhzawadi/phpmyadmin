@@ -3,10 +3,10 @@ LABEL org.opencontainers.image.authors="matt@horwood.biz"
 
 # Install required deb packages
 RUN apk update && \
-    apk add gnupg unit-php84 php84-common php84-iconv php84-json php84-gd \
-    php84-curl php84-xml php84-mysqli php84-imap php84-pdo php84-pdo_mysql \
-    php84-soap php84-posix php84-gettext php84-ldap \
-    php84-ctype php84-dom php84-session php84-mbstring curl \
+    apk add gnupg nginx php85-fpm php85-common php85-iconv php85-json php85-gd \
+    php85-curl php85-xml php85-mysqli php85-imap php85-pdo php85-pdo_mysql \
+    php85-soap php85-posix php85-gettext php85-ldap \
+    php85-ctype php85-dom php85-session php85-mbstring curl \
     && mkdir -p /var/www/html/ \
     && mkdir -p /run/nginx \
     && rm -f /var/cache/apk/*;
@@ -27,6 +27,7 @@ RUN set -ex; \
     mkdir /usr/src; \
     mkdir /etc/phpmyadmin/; \
     mkdir /sessions; \
+    chown nobody:root /sessions; \
     ls -l /config; \
     export GNUPGHOME="$(mktemp -d)"; \
     export GPGKEY="3D06A59ECE730EB71B511C17CE752F178259BD92"; \
@@ -46,13 +47,15 @@ RUN set -ex; \
     sed -i "s@'configFile' => ROOT_PATH . 'config.inc.php',@'configFile' => '/etc/phpmyadmin/config.inc.php',@" /usr/src/phpmyadmin/libraries/vendor_config.php; \
     cp -R /usr/src/phpmyadmin/* /var/www/html/; \
     cp /config/config.inc.php /etc/phpmyadmin/config.inc.php && \
-    cp /config/php.ini /etc/php84/php.ini && \
-    chown -R unit:unit /var/www/html /sessions; \
+    cp /config/php.ini /etc/php85/php.ini && \
+    cp /config/php-fpm.conf /etc/php85/php-fpm.conf && \
+    cp /config/php_fpm_site.conf /etc/php85/php-fpm.d/www.conf && \
+    cp /config/nginx_site.conf /etc/nginx/http.d/default.conf; \
     cp /config/healthcheck.php /var/www/html/;
 
 EXPOSE 80
 ENTRYPOINT ["/config/start.sh"]
-CMD ["unitd", "--no-daemon", "--control", "unix:/var/run/control.unit.sock"]
+CMD ["nginx", "-g", "daemon off;"]
 
 ## Health Check
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s \
